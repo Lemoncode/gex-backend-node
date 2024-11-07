@@ -1,3 +1,4 @@
+import { ENV } from "#core/constants/env.constants.js";
 import prompts from "prompts";
 
 let exit = false;
@@ -6,7 +7,7 @@ while (!exit) {
     name: "consoleRunner",
     type: "select",
     message: "Which console-runner do you want to run?",
-    choices: ["create-admin", "exit"].map((option) => ({
+    choices: ["seed-data", "exit"].map((option) => ({
       title: option,
       value: option,
     })),
@@ -14,7 +15,7 @@ while (!exit) {
 
   if (consoleRunner !== "exit") {
     const { run } = await import(`./${consoleRunner}.runner.js`);
-    await run();
+    await run(ENV.MONGODB_URL);
   } else {
     exit = true;
   }

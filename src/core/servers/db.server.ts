@@ -8,12 +8,18 @@ const connect = async (connectionURL: string) => {
   dbServer.db = client.db();
 };
 
+const disconnect = async () => {
+  await client.close();
+};
+
 interface DBServer {
   connect: (connectionURL: string) => Promise<void>;
+  disconnect: () => Promise<void>;
   db: Db;
 }
 
 export let dbServer: DBServer = {
   connect,
+  disconnect,
   db: undefined,
 };
