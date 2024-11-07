@@ -1,0 +1,25 @@
+{
+  "name": "gex-backend-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "run-p -l type-check:watch start:dev",
+    "start:dev": "tsx --watch src/index.ts",
+    "type-check": "tsc --noEmit --preserveWatchOutput",
+    "type-check:watch": "npm run type-check -- --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
