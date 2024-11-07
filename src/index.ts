@@ -1,9 +1,12 @@
 import express from "express";
 import path from "node:path";
-import { createRestApiServer } from "./core/servers/index.js";
-import { ENV } from "./core/constants/index.js";
+import { createRestApiServer } from "#core/servers/index.js";
+import { ENV } from "#core/constants/index.js";
+import { userApi } from "#pods/user/index.js";
 
 const app = createRestApiServer();
+
+app.use("/api/user", userApi);
 
 app.use(
   "/",
