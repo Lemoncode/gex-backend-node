@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "prestart": "node ./create-dev-env.js",
-    "start": "run-p -l type-check:watch start:dev",
+    "start": "run-p -l type-check:watch start:dev start:local-db",
     "start:dev": "tsx --require dotenv/config --watch src/index.ts",
     "start:console-runners": "tsx --require dotenv/config --watch src/console-runners/index.ts",
+    "start:local-db": "docker compose up -d",
     "type-check": "tsc --noEmit --preserveWatchOutput",
     "type-check:watch": "npm run type-check -- --watch"
   },
