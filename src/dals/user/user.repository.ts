@@ -1,22 +1,11 @@
-import { db } from "../mock.data.js";
+import { getUserContext } from "./user.context.js";
 import { User } from "./user.model.js";
 
-const paginateBookList = (
-  userList: User[],
-  page: number,
-  pageSize: number
-): User[] => {
-  let paginatedUserList = [...userList];
-  if (page && pageSize) {
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, paginatedUserList.length);
-    paginatedUserList = paginatedUserList.slice(startIndex, endIndex);
-  }
-
-  return paginatedUserList;
-};
-
 export const userRepository = {
-  getUserList: async (page?: number, pageSize?: number) =>
-    paginateBookList(db.users, page, pageSize),
+  getUserList: async (page?: number, pageSize?: number): Promise<User[]> => {
+    const skip = Boolean(page) ? (page - 1) * pageSize : 0;
+    const limit = pageSize ?? 0;
+
+    return await getUserContext().find().skip(skip).limit(limit).toArray();
+  },
 };

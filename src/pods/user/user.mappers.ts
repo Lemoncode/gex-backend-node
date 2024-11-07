@@ -1,8 +1,9 @@
+import { mapObjectIdToString, mapToCollection } from "#common/mappers/index.js";
 import * as model from "#dals/user/user.model.js";
 import * as apiModel from "./user.api-model.js";
 
 export const mapUserFromModelToApi = (user: model.User): apiModel.User => ({
-  id: user._id,
+  id: mapObjectIdToString(user._id),
   nombre: user.nombre,
   apellidos: user.apellidos,
   email: user.email,
@@ -17,4 +18,4 @@ export const mapUserFromModelToApi = (user: model.User): apiModel.User => ({
 
 export const mapUserListFromModelToApi = (
   userList: model.User[]
-): apiModel.User[] => userList.map(mapUserFromModelToApi);
+): apiModel.User[] => mapToCollection(userList, mapUserFromModelToApi);

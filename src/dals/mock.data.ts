@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { User } from "./user/index.js";
 
 export interface DB {
@@ -7,7 +8,7 @@ export interface DB {
 export const db: DB = {
   users: [
     {
-      _id: "1",
+      _id: new ObjectId(),
       nombre: "Carlos",
       apellidos: "González Pérez",
       email: "carlos.gonzalez@example.com",
@@ -20,7 +21,7 @@ export const db: DB = {
       esAutorizante: false,
     },
     {
-      _id: "2",
+      _id: new ObjectId(),
       nombre: "María",
       apellidos: "Martínez López",
       email: "maria.martinez@example.com",
@@ -33,7 +34,7 @@ export const db: DB = {
       esAutorizante: true,
     },
     {
-      _id: "3",
+      _id: new ObjectId(),
       nombre: "Juan",
       apellidos: "Rodríguez Sánchez",
       email: "juan.rodriguez@example.com",
@@ -46,7 +47,7 @@ export const db: DB = {
       esAutorizante: true,
     },
     {
-      _id: "4",
+      _id: new ObjectId(),
       nombre: "Laura",
       apellidos: "García Ruiz",
       email: "laura.garcia@example.com",
@@ -59,7 +60,7 @@ export const db: DB = {
       esAutorizante: false,
     },
     {
-      _id: "5",
+      _id: new ObjectId(),
       nombre: "Miguel",
       apellidos: "Fernández Gómez",
       email: "miguel.fernandez@example.com",
