@@ -1,11 +1,15 @@
 import express from "express";
+import path from "node:path";
+import { createRestApiServer } from "./core/servers/index.js";
+import { ENV } from "./core/constants/index.js";
 
-const app = express();
+const app = createRestApiServer();
 
-app.get("/", (req, res) => {
-  res.send("My awesome books portal");
-});
+app.use(
+  "/",
+  express.static(path.resolve(import.meta.dirname, ENV.STATIC_FILES_PATH))
+);
 
-app.listen(3000, () => {
-  console.log("Server ready at port 3000");
+app.listen(ENV.PORT, () => {
+  console.log(`Server ready at port ${ENV.PORT}`);
 });
