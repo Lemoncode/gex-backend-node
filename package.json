@@ -27,7 +27,6 @@
     "winston": "^3.16.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/prompts": "^2.4.9",
     "dotenv": "^16.4.5",
