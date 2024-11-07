@@ -12,14 +12,15 @@
     "type-check:watch": "npm run type-check -- --watch"
   },
   "imports": {
-   "#*": "./src/*"
- },
+    "#*": "./src/*"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "winston": "^3.16.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
