@@ -1,4 +1,4 @@
 echo "[PRE-PUSH hook] Executing typecheck & unit tests"
 
 npm run type-check
-npm run test -- --bail
+npm run test -- --bail=1
