@@ -13,8 +13,7 @@
     "type-check": "tsc --noEmit --preserveWatchOutput",
     "type-check:watch": "npm run type-check -- --watch",
     "test": "vitest run -c ./config/test/config.ts",
-    "test:watch": "vitest watch -c ./config/test/config.ts",
-    "prepare": "husky"
+    "test:watch": "vitest watch -c ./config/test/config.ts"
   },
   "imports": {
     "#*": "./src/*"
