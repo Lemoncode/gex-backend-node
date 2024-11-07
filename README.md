@@ -1,5 +1,13 @@
 # gex-backend-node
 
+>> Note: We must be installed almost Node.js 22.11.0 or higher.
+>> 
+>> [Node.js](https://nodejs.org/)
+>>
+>> we can also use [nvm for windows](https://github.com/coreybutler/nvm-windows/releases) to manage the Node.js versions
+>> or for linux/macOS we can use [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+
+
 ## Steps to run the project
 
 ### Installation
