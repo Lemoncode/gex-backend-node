@@ -1,0 +1,4 @@
+echo "Executing typecheck & unit tests..."
+
+npm run type-check
+npm run test -- --bail=1

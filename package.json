@@ -1,0 +1,42 @@
+{
+  "name": "gex-backend-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "prestart": "node ./create-dev-env.js",
+    "start": "run-p -l type-check:watch start:dev start:local-db",
+    "start:dev": "tsx --require dotenv/config --watch src/index.ts",
+    "start:console-runners": "tsx --require dotenv/config --watch src/console-runners/index.ts",
+    "start:local-db": "docker compose up -d",
+    "type-check": "tsc --noEmit --preserveWatchOutput",
+    "type-check:watch": "npm run type-check -- --watch",
+    "test": "vitest run -c ./config/test/config.ts",
+    "test:watch": "vitest watch -c ./config/test/config.ts"
+  },
+  "imports": {
+    "#*": "./src/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "winston": "^3.16.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/prompts": "^2.4.9",
+    "dotenv": "^16.4.5",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.3.3",
+    "prompts": "^2.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}
