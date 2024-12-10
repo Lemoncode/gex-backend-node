@@ -1,8 +1,10 @@
 import { ObjectId } from "mongodb";
 import { User } from "./user/index.js";
+import { LookupModel } from "./lookups/lookup.model.js";
 
 export interface DB {
   users: User[];
+  unidadesProponentesLookups: LookupModel[]
 }
 
 export const db: DB = {
@@ -73,4 +75,9 @@ export const db: DB = {
       esAutorizante: false,
     },
   ],
+  unidadesProponentesLookups:[
+    { _id: new ObjectId(), code: "E1", nombre: "Unidad E" },
+    { _id: new ObjectId(), code: "B2", nombre: "Unidad B" },
+    { _id: new ObjectId(), code: "C4", nombre: "Unidad C" }
+  ]
 };
