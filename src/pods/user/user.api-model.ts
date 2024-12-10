@@ -1,13 +1,24 @@
+import { Rol } from "#dals/user/user.model.js";
+
 export interface User {
   id: string;
   nombre: string;
   apellidos: string;
   email: string;
-  telefonoFijo: string;
-  telefonoMovil: string;
-  telefonoInstitucional: string;
-  clave: string;
-  rol: string;
+  telefono: string;
+  movil: string;
+  rol : {
+    id: string,
+    nombre: Rol,
+  };
   esResponsable: boolean;
-  esAutorizante: boolean;
+  esProponente: boolean;
+  esAutorizante : boolean;
+  esContraseñaTemporal : boolean;
+  contraseña?: string;
+  salt?: string;
+  unidad: {
+    id: string;
+    nombre: string;
+  }
 }

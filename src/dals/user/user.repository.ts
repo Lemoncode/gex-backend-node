@@ -18,13 +18,20 @@ export const userRepository = {
           nombre: 1,
           apellidos: 1,
           email: 1,
-          telefonoFijo: 1,
-          telefonoMovil: 1,
-          telefonoInstitucional: 1,
-          clave: 1,
-          rol: 1,
+          telefono: 1,
+          movil: 1,
+          rol : {
+              _id: 1,
+              nombre: 1,
+          },
           esResponsable: 1,
-          esAutorizante: 1,
+          esProponente: 1,
+          esAutorizante : 1,
+          esContraseñaTemporal : 1,
+          unidad: {
+              id: 1,
+              nombre: 1,
+          }
         },
       }
     );

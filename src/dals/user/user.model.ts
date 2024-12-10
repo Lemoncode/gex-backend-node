@@ -1,15 +1,26 @@
 import { ObjectId } from 'mongodb';
 
+export type Rol = 'Usuario-Administrador' | 'Usuario-Escritura' | 'Usuario-Lectura';
+
 export interface User {
-  _id: ObjectId;
+  _id: ObjectId; 
   nombre: string;
   apellidos: string;
   email: string;
-  telefonoFijo: string;
-  telefonoMovil: string;
-  telefonoInstitucional: string;
-  clave: string;
-  rol: string;
+  telefono: string;
+  movil?: string;
+  rol : {
+      _id: ObjectId,
+      nombre: Rol,
+  };
   esResponsable: boolean;
-  esAutorizante: boolean;
+  esProponente: boolean;
+  esAutorizante : boolean;
+  esContraseñaTemporal : boolean;
+  contraseña : string;
+  salt: string;
+  unidad: {
+     id: ObjectId;
+     nombre: string;
+  }
 }
