@@ -1,4 +1,5 @@
-import { generateSalt, hashPassword } from "#common/helpers/hash-password.helpers.js";
+import { hash } from '#common/helpers/index.js';
+import { getUserContext } from '#dals/user/user.context.js';
 import { dbServer } from "#core/servers/db.server.js";
 import { db } from "#dals/mock.data.js";
 
@@ -7,13 +8,11 @@ export const run = async (connectionString: string) => {
     await dbServer.connect(connectionString);
 
     for (const user of db.users) {
-      const salt = await generateSalt();
-      const hashedPassword = await hashPassword(user.contraseña, salt);
-
-      await dbServer.db.collection("users").insertOne({
+      const hashedPassword = await hash(user.contraseña);
+    
+      await getUserContext().insertOne({
         ...user,
         contraseña: hashedPassword,
-        salt,
       });
     }
 
