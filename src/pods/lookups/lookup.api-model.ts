@@ -1,5 +1,5 @@
 export interface LookupModel {
-  id: string; 
+  id: string;
+  nombre: string;
   code?: string;
-  nombre: string; 
 }
