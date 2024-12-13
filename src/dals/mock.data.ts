@@ -4,7 +4,7 @@ import { LookupModel } from './lookups/lookup.model.js';
 
 export interface DB {
   users: User[];
-  unidadesProponentesLookups: LookupModel[];
+  unidadProponentes: LookupModel[];
 }
 
 export const db: DB = {
@@ -75,7 +75,7 @@ export const db: DB = {
       esAutorizante: false,
     },
   ],
-  unidadesProponentesLookups: [
+  unidadProponentes: [
     { _id: new ObjectId(), nombre: 'Unidad E', code: 'E1' },
     { _id: new ObjectId(), nombre: 'Unidad B', code: 'B2' },
     { _id: new ObjectId(), nombre: 'Unidad C', code: 'C4' },
