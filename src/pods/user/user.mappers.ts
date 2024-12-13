@@ -7,13 +7,20 @@ export const mapUserFromModelToApi = (user: model.User): apiModel.User => ({
   nombre: user.nombre,
   apellidos: user.apellidos,
   email: user.email,
-  telefonoFijo: user.telefonoFijo,
-  telefonoMovil: user.telefonoMovil,
-  telefonoInstitucional: user.telefonoInstitucional,
-  clave: user.clave,
-  rol: user.rol,
+  telefono: user.telefono,
+  movil: user.movil,
+  rol: {
+    id: mapObjectIdToString(user.rol._id),
+    nombre: user.rol.nombre,
+  },
   esResponsable: user.esResponsable,
+  esProponente: user.esProponente,
   esAutorizante: user.esAutorizante,
+  esContraseñaTemporal: user.esContraseñaTemporal,
+  unidad: {
+    id: mapObjectIdToString(user.unidad.id),
+    nombre: user.unidad.nombre,
+  },
 });
 
 export const mapUserListFromModelToApi = (

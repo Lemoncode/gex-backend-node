@@ -1,3 +1,5 @@
+import { hash } from '#common/helpers/index.js';
+import { getUserContext } from '#dals/user/user.context.js';
 import { dbServer } from "#core/servers/db.server.js";
 import { db } from "#dals/mock.data.js";
 
@@ -6,7 +8,12 @@ export const run = async (connectionString: string) => {
     await dbServer.connect(connectionString);
 
     for (const user of db.users) {
-      await dbServer.db.collection("users").insertOne(user);
+      const hashedPassword = await hash(user.contraseña);
+    
+      await getUserContext().insertOne({
+        ...user,
+        contraseña: hashedPassword,
+      });
     }
 
     console.log("Data seeded successfully");
