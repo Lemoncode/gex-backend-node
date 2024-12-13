@@ -9,7 +9,7 @@ export const run = async (connectionString: string) => {
       await dbServer.db.collection('users').insertOne(user);
     }
     for (const up of db.unidadProponentes) {
-      await dbServer.db.collection('unidadesProponentesLookups').insertOne(up);
+      await dbServer.db.collection('unidadProponentes').insertOne(up);
     }
 
     console.log('Data seeded successfully');
