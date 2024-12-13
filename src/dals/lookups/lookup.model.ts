@@ -1,7 +1,7 @@
-import { ObjectId } from "mongodb"; 
+import { ObjectId } from 'mongodb';
 
 export interface LookupModel {
-  _id: ObjectId; 
+  _id: ObjectId;
+  nombre: string;
   code?: string;
-  nombre: string; 
 }
