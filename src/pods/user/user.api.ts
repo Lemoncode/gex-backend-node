@@ -22,10 +22,10 @@ userApi
       const user = await userRepository.getUser(id, {
         id: 1,
         nombre: 1,
-        apellidos: 1,
+        apellido: 1,
         email: 1,
-        telefonoFijo: 1,
-        telefonoMovil: 1,
+        telefono: 1,
+        movil: 1,
         telefonoInstitucional: 1,
         clave: 1,
         rol: 1,

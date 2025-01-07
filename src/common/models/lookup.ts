@@ -1,7 +1,5 @@
-import { ObjectId } from 'mongodb';
-
 export interface Lookup {
-  _id: ObjectId;
+  id: string;
   nombre: string;
   code?: string;
 }

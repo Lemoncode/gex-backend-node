@@ -5,15 +5,15 @@ import * as apiModel from './user.api-model.js';
 export const mapUserFromModelToApi = (user: model.Usuario): apiModel.Usuario => ({
   id: mapObjectIdToString(user._id),
   nombre: user.nombre,
-  apellidos: user.apellidos,
+  apellido: user.apellido,
   email: user.email,
-  telefonoFijo: user.telefonoFijo,
-  telefonoMovil: user.telefonoMovil,
-  telefonoInstitucional: user.telefonoInstitucional,
-  clave: user.clave,
+  telefono: user.telefono,
+  movil: user.movil,
   rol: user.rol,
   esResponsable: user.esResponsable,
+  esProponente: user.esProponente,
   esAutorizante: user.esAutorizante,
+  unidad: user.unidad,
 });
 
 export const mapUserListFromModelToApi = (userList: model.Usuario[]): apiModel.Usuario[] =>
