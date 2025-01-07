@@ -21,4 +21,13 @@ lookupApi
     } catch (error) {
       next(error);
     }
+  })
+  .get('/unidad-rol', async (req, res, next) => {
+    try {
+      const unidadRolList = await lookupRepository.getUnidadRolList();
+
+      res.send(unidadRolList);
+    } catch (error) {
+      next(error);
+    }
   });
