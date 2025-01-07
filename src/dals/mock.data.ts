@@ -1,14 +1,15 @@
 import { ObjectId } from 'mongodb';
-import { User } from './user/index.js';
-import { LookupModel } from './lookup/index.js';
+import { Lookup } from '#common/models/index.js';
+import { Usuario } from './user/index.js';
 
 export interface DB {
-  users: User[];
-  lookups: LookupModel[];
+  usuarios: Usuario[];
+  unidadProponentes: Lookup[];
+  roles: Lookup[];
 }
 
 export const db: DB = {
-  users: [
+  usuarios: [
     {
       _id: new ObjectId(),
       nombre: 'Carlos',
@@ -75,7 +76,12 @@ export const db: DB = {
       esAutorizante: false,
     },
   ],
-  lookups: [
+  unidadProponentes: [
+    { _id: new ObjectId(), nombre: 'Unidad E', code: 'E1' },
+    { _id: new ObjectId(), nombre: 'Unidad B', code: 'B2' },
+    { _id: new ObjectId(), nombre: 'Unidad C', code: 'C4' },
+  ],
+  roles: [
     {
       _id: new ObjectId(),
       nombre: 'Usuario-Administrador',

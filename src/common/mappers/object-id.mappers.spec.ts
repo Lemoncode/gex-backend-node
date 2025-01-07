@@ -1,14 +1,14 @@
-import { mapToCollection } from "./collection.mapper.js";
+import { mapToCollection } from './collection.mapper.js';
 
-describe("common/mappers/collection.mapper spec", () => {
-  describe("mapToCollection", () => {
-    it("should return empty array when it feeds collection equals undefined", () => {
+describe('common/mappers/collection.mapper spec', () => {
+  describe('mapToCollection', () => {
+    it('should return empty array when it feeds collection equals undefined', () => {
       //Arrange
       const value = undefined;
 
-      const map = (item) => ({
+      const map = item => ({
         value1: item.value1 * 2,
-        value2: item.value2 + "C",
+        value2: item.value2 + 'C',
       });
 
       //Act
@@ -20,13 +20,13 @@ describe("common/mappers/collection.mapper spec", () => {
       expect(result).toEqual(valores);
     });
 
-    it("should return empty array when it feeds collection equals null", () => {
+    it('should return empty array when it feeds collection equals null', () => {
       //Arrange
       const value = null;
 
-      const map = (item) => ({
+      const map = item => ({
         value1: item.value1 * 2,
-        value2: item.value2 + "C",
+        value2: item.value2 + 'C',
       });
 
       //Act
@@ -38,13 +38,13 @@ describe("common/mappers/collection.mapper spec", () => {
       expect(result).toEqual(valores);
     });
 
-    it("should return empty array when it feeds collection equals empty array", () => {
+    it('should return empty array when it feeds collection equals empty array', () => {
       //Arrange
       const value = [];
 
-      const map = (item) => ({
+      const map = item => ({
         value1: item.value1 * 2,
-        value2: item.value2 + "C",
+        value2: item.value2 + 'C',
       });
 
       //Act
@@ -56,22 +56,22 @@ describe("common/mappers/collection.mapper spec", () => {
       expect(result).toEqual(valores);
     });
 
-    it("should return mapped collection when it feeds collection and function to map ", () => {
+    it('should return mapped collection when it feeds collection and function to map ', () => {
       //Arrange
       const collection = [
         {
           value1: 1,
-          value2: "A",
+          value2: 'A',
         },
         {
           value1: 2,
-          value2: "B",
+          value2: 'B',
         },
       ];
 
-      const map = (item) => ({
+      const map = item => ({
         value1: item.value1 * 2,
-        value2: item.value2 + "C",
+        value2: item.value2 + 'C',
       });
 
       //Act
@@ -81,11 +81,11 @@ describe("common/mappers/collection.mapper spec", () => {
       const valores = [
         {
           value1: 2,
-          value2: "AC",
+          value2: 'AC',
         },
         {
           value1: 4,
-          value2: "BC",
+          value2: 'BC',
         },
       ];
       expect(result).toEqual(valores);
