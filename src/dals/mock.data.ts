@@ -5,6 +5,7 @@ import { Usuario } from './user/index.js';
 export interface DB {
   usuarios: Usuario[];
   unidadProponentes: Lookup[];
+  roles: Lookup[];
 }
 
 export const db: DB = {
@@ -79,5 +80,19 @@ export const db: DB = {
     { _id: new ObjectId(), nombre: 'Unidad E', code: 'E1' },
     { _id: new ObjectId(), nombre: 'Unidad B', code: 'B2' },
     { _id: new ObjectId(), nombre: 'Unidad C', code: 'C4' },
+  ],
+  roles: [
+    {
+      _id: new ObjectId(),
+      nombre: 'Usuario-Administrador',
+    },
+    {
+      _id: new ObjectId(),
+      nombre: 'Usuario-Escritura',
+    },
+    {
+      _id: new ObjectId(),
+      nombre: 'Usuario-Lectura',
+    },
   ],
 };
