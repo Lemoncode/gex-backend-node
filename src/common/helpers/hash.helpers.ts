@@ -3,6 +3,8 @@ import crypto from 'node:crypto';
 const saltLenght = 32;
 const hashLength = 64;
 
+export const generateSalt = async (): Promise<string> => crypto.randomBytes(saltLenght).toString('hex');
+
 const hashSaltAndPassword = (salt: string, password: string): Promise<string> =>
   new Promise((resolve, reject) => {
     crypto.scrypt(password, salt, hashLength, (error, hashedPassword) => {
