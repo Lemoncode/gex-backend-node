@@ -1,6 +1,9 @@
 import { Router } from 'express';
+import { generateSalt, hash } from '#common/helpers/index.js';
 import { userRepository } from '#dals/user/user.repository.js';
-import { mapUserListFromModelToApi, mapUserFromModelToApi } from './user.mappers.js';
+import { mapUserListFromModelToApi, mapUserFromModelToApi, mapUserFromApiToModel } from './user.mappers.js';
+import * as apiModel from './user.api-model.js';
+import * as model from '#dals/user/user.model.js';
 
 export const userApi = Router();
 
@@ -34,6 +37,25 @@ userApi
       });
 
       user ? res.send(mapUserFromModelToApi(user)) : res.sendStatus(404);
+    } catch (error) {
+      next(error);
+    }
+  })
+  .post('/', async (req, res, next) => {
+    try {
+      const user: apiModel.Usuario = req.body;
+      if (await userRepository.emailExists(user.email, '')) {
+        res.status(200).send('Email ya registrado');
+      } else {
+        const password = await generateSalt();
+        const hashedPassword = await hash(password);
+
+        const userModel: model.Usuario = mapUserFromApiToModel({ user, hashedPassword, isTemporalPassword: true });
+
+        await userRepository.saveUser(userModel);
+
+        res.send(mapUserFromModelToApi(userModel));
+      }
     } catch (error) {
       next(error);
     }

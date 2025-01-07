@@ -15,3 +15,9 @@ export interface Usuario {
   contraseña?: string;
   unidad: Lookup;
 }
+
+export interface SaveUserParams {
+  user: Usuario;
+  hashedPassword: string;
+  isTemporalPassword: boolean;
+}

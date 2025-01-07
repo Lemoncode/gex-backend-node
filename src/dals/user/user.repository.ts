@@ -18,4 +18,15 @@ export const userRepository = {
   },
   getUser: async (id: string, selectedFields: SelectedFields<Usuario>) =>
     await getUserContext().findOne({ _id: mapStringToObjectId(id) }, { projection: selectedFields }),
+  emailExists: async (email: string, id: string) =>
+    (await getUserContext().countDocuments({ email, _id: { $ne: mapStringToObjectId(id) } })) > 0,
+  saveUser: async (user: Usuario) => {
+    const saveUser = await getUserContext().findOneAndUpdate(
+      { _id: user._id },
+      { $set: user },
+      { upsert: true, returnDocument: 'after', ignoreUndefined: true }
+    );
+
+    return saveUser;
+  },
 };
