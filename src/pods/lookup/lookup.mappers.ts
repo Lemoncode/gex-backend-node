@@ -1,6 +1,6 @@
 import { mapToCollection, mapObjectIdToString } from '#common/mappers/index.js';
 import { Lookup } from '#common/models/index.js';
-import * as apiModel from './unidad-proponente.api-model.js';
+import * as apiModel from './lookup.api-model.js';
 
 const mapLookupFromModelToApi = (lookup: Lookup): apiModel.Lookup => ({
   id: mapObjectIdToString(lookup._id),
