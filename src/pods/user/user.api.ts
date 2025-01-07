@@ -19,12 +19,21 @@ userApi
   .get('/:id', async (req, res, next) => {
     try {
       const { id } = req.params;
-      const user = await userRepository.getUser(id);
-      if (user) {
-        res.send(mapUserFromModelToApi(user));
-      } else {
-        res.sendStatus(404);
-      }
+      const user = await userRepository.getUser(id, {
+        id: 1,
+        nombre: 1,
+        apellidos: 1,
+        email: 1,
+        telefonoFijo: 1,
+        telefonoMovil: 1,
+        telefonoInstitucional: 1,
+        clave: 1,
+        rol: 1,
+        esResponsable: 1,
+        esAutorizante: 1,
+      });
+
+      user ? res.send(mapUserFromModelToApi(user)) : res.sendStatus(404);
     } catch (error) {
       next(error);
     }

@@ -1,4 +1,4 @@
-import { dbServer } from "#core/servers/index.js";
-import { LookupModel } from "./lookup.model.js";
+import { Lookup } from '#common/models/lookup.js';
+import { dbServer } from '#core/servers/index.js';
 
-export const getUnidadesProponentesContext = () => dbServer.db?.collection<LookupModel>("unidadProponentes");
+export const getUnidadesProponentesContext = () => dbServer.db?.collection<Lookup>('unidadProponentes');

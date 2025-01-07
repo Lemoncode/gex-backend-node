@@ -1,5 +1,5 @@
-import { RequestHandler, ErrorRequestHandler } from "express";
-import { Logger } from "winston";
+import { RequestHandler, ErrorRequestHandler } from 'express';
+import { Logger } from 'winston';
 
 export const logRequestMiddleware =
   (logger: Logger): RequestHandler =>

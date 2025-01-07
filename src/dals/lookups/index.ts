@@ -1,1 +1,2 @@
-export * from "./lookup.model.js";
+export * from './lookup.repository.js';
+export * from './lookup.context.js';
