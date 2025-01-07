@@ -1,15 +1,18 @@
-import { dbServer } from "#core/servers/db.server.js";
-import { db } from "#dals/mock.data.js";
+import { dbServer } from '#core/servers/db.server.js';
+import { db } from '#dals/mock.data.js';
 
 export const run = async (connectionString: string) => {
   try {
     await dbServer.connect(connectionString);
 
     for (const user of db.users) {
-      await dbServer.db.collection("users").insertOne(user);
+      await dbServer.db.collection('users').insertOne(user);
+    }
+    for (const up of db.unidadProponentes) {
+      await dbServer.db.collection('unidadProponentes').insertOne(up);
     }
 
-    console.log("Data seeded successfully");
+    console.log('Data seeded successfully');
 
     await dbServer.disconnect();
   } catch (error) {
