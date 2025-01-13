@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { generateSalt, hash } from '#common/helpers/index.js';
 import { userRepository } from '#dals/user/user.repository.js';
 import { mapUserListFromModelToApi, mapUserFromModelToApi, mapUserFromApiToModel } from './user.mappers.js';
+import { validationPostUser } from './validations/index.js';
 import * as apiModel from './user.api-model.js';
 import * as model from '#dals/user/user.model.js';
 
@@ -44,9 +45,9 @@ userApi
   .post('/', async (req, res, next) => {
     try {
       const user: apiModel.Usuario = req.body;
-      if (await userRepository.emailExists(user.email, '')) {
-        res.status(200).send('Email ya registrado');
-      } else {
+      const validationResult = await validationPostUser(user);
+
+      if (validationResult.succeded) {
         const password = await generateSalt();
         const hashedPassword = await hash(password);
 
@@ -55,6 +56,8 @@ userApi
         await userRepository.saveUser(userModel);
 
         res.send(mapUserFromModelToApi(userModel));
+      } else {
+        res.status(409).send(validationResult.error);
       }
     } catch (error) {
       next(error);
