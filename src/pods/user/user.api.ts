@@ -62,4 +62,27 @@ userApi
     } catch (error) {
       next(error);
     }
+  })
+  .patch('/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const existingUser = await userRepository.getUser(id, { _id: 1 });
+
+      if (existingUser) {
+        const temporaryPassword = await generateSalt();
+        const hashedPassword = await hash(temporaryPassword);
+
+        await userRepository.updateUser(id, { 
+            contraseña: hashedPassword, 
+            esContraseñaTemporal: true,
+          }
+        );
+
+        res.status(200).send({ temporaryPassword });
+      } else {
+        res.sendStatus(400);
+      }
+    } catch (error) {
+      next(error);
+    }
   });
