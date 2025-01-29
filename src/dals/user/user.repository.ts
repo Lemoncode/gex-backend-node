@@ -29,4 +29,12 @@ export const userRepository = {
 
     return saveUser;
   },
+  updateUser: async (id: string, updateFields: Partial<Usuario>) => {
+    const userId = mapStringToObjectId(id);
+    return await getUserContext().findOneAndUpdate(
+      { _id: userId },
+      { $set: updateFields },
+      { upsert: true, returnDocument: 'after', ignoreUndefined: true },
+    );
+  },
 };
