@@ -62,4 +62,31 @@ userApi
     } catch (error) {
       next(error);
     }
+  })
+  .put('/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const editedUser: apiModel.Usuario = req.body;
+      const existingUser = await userRepository.getUser(id, {
+        contraseña: 1,
+        esContraseñaTemporal: 1,
+      });
+      
+      if (userRepository.emailExists(editedUser.email, id) && existingUser) {
+        const hashedPassword = existingUser.contraseña;
+        const isTemporalPassword = existingUser.esContraseñaTemporal;
+        const userWithId = {
+          id: id,
+          ...editedUser,
+        };
+        const mappedUser = mapUserFromApiToModel({ user: userWithId, hashedPassword, isTemporalPassword });
+        await userRepository.saveUser(mappedUser);
+        res.sendStatus(204);
+      } else {
+        res.sendStatus(400);
+      }
+    } catch (error) {
+      next(error);
+    }
   });
+  
