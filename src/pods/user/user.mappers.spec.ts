@@ -58,7 +58,7 @@ describe('pods/user/user.mappers', () => {
     });
 
     it.each<{ user: model.Usuario }>([{ user: undefined }, { user: null }])(
-      'should return undefined when user equals $resource',
+      'should return undefined when user equals $user',
       ({ user }) => {
         // Arrange
 
