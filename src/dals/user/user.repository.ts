@@ -31,7 +31,7 @@ export const userRepository = {
     return saveUser;
   },
   isValidLogin: async (email: string, password: string) => {
-    const user = await getUserContext().findOne({ email, password });
+    const user = await getUserContext().findOne({ email });
     if (user) {
       const { contraseña, ...userInfo } = user;
       const isEqualPassword = verifyHash(password, contraseña);
