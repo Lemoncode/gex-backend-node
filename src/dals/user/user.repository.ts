@@ -6,7 +6,7 @@ import { Usuario } from './user.model.js';
 
 export const userRepository = {
   getUserList: async (page?: number, pageSize?: number): Promise<CollectionQuery<Usuario>> => {
-    const existPageAndPageSize = page !== undefined && page !== null && pageSize !== undefined && pageSize !== null;
+    const existPageAndPageSize = Number.isInteger(page) && Number.isInteger(pageSize);
     const totalDocuments = await getUserContext().countDocuments();
 
     if (existPageAndPageSize) {
@@ -21,16 +21,16 @@ export const userRepository = {
           totalPages: totalDocuments,
         },
       };
+    } else {
+      const userList = await getUserContext().find().toArray();
+
+      return {
+        data: userList,
+        pagination: {
+          totalPages: totalDocuments,
+        },
+      };
     }
-
-    const userList = await getUserContext().find().toArray();
-
-    return {
-      data: userList,
-      pagination: {
-        totalPages: totalDocuments,
-      },
-    };
   },
   getUser: async (id: string, selectedFields?: SelectedFields<Usuario>) =>
     await getUserContext().findOne({ _id: mapStringToObjectId(id) }, { projection: selectedFields }),

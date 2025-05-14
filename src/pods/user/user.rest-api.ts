@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { generateSalt, hash } from '#common/helpers/index.js';
 import { userRepository } from '#dals/user/user.repository.js';
-import { mapUserListFromModelToApi, mapUserFromModelToApi, mapUserFromApiToModel } from './user.mappers.js';
+import { mapUserListFromModelToApi, mapUsuarioDetalleFromModelToApi, mapUserFromApiToModel } from './user.mappers.js';
 import { validationPostUser } from './validations/index.js';
 import * as apiModel from './user.api-model.js';
 import * as model from '#dals/user/user.model.js';
@@ -44,16 +44,18 @@ userApi
         rol: 1,
         esResponsable: 1,
         esAutorizante: 1,
+        esProponente: 1,
+        unidad: 1,
       });
 
-      user ? res.send(mapUserFromModelToApi(user)) : res.sendStatus(404);
+      user ? res.send(mapUsuarioDetalleFromModelToApi(user)) : res.sendStatus(404);
     } catch (error) {
       next(error);
     }
   })
   .post('/', async (req, res, next) => {
     try {
-      const user: apiModel.Usuario = req.body;
+      const user: apiModel.UsuarioDetalle = req.body;
       const validationResult = await validationPostUser(user);
 
       if (validationResult.succeded) {
@@ -64,7 +66,7 @@ userApi
 
         await userRepository.saveUser(userModel);
 
-        res.send(mapUserFromModelToApi(userModel));
+        res.send(mapUsuarioDetalleFromModelToApi(userModel));
       } else {
         res.status(409).send(validationResult.error);
       }

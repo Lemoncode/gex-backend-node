@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { lookupRepository } from '#dals/lookup/lookup.repository.js';
+import { mapLookupListToApiModel } from '#common/mappers/index.js';
 
 export const lookupApi = Router();
 
@@ -8,7 +9,7 @@ lookupApi
     try {
       const unidadesList = await lookupRepository.getUnidadList();
 
-      res.send(unidadesList);
+      res.send(mapLookupListToApiModel(unidadesList));
     } catch (error) {
       next(error);
     }
@@ -17,7 +18,7 @@ lookupApi
     try {
       const rolesList = await lookupRepository.getRolList();
 
-      res.send(rolesList);
+      res.send(mapLookupListToApiModel(rolesList));
     } catch (error) {
       next(error);
     }
@@ -26,7 +27,14 @@ lookupApi
     try {
       const unidadRolList = await lookupRepository.getUnidadRolList();
 
-      res.send(unidadRolList);
+      const { roles, unidades } = unidadRolList;
+      const mappedRoles = mapLookupListToApiModel(roles);
+      const mappedUnidades = mapLookupListToApiModel(unidades);
+
+      res.send({
+        roles: mappedRoles,
+        unidades: mappedUnidades,
+      });
     } catch (error) {
       next(error);
     }

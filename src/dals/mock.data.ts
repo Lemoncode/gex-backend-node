@@ -1,11 +1,11 @@
 import { ObjectId } from 'mongodb';
-import { Lookup } from '#common/models/index.js';
+import { LookupModel } from '#common/models/index.js';
 import { Usuario } from './user/index.js';
 
 export interface DB {
   usuarios: Usuario[];
-  unidadProponentes: Lookup[];
-  roles: Lookup[];
+  unidadProponentes: LookupModel[];
+  roles: LookupModel[];
 }
 
 export const db: DB = {
@@ -18,7 +18,7 @@ export const db: DB = {
       telefono: '910123456',
       movil: '620123456',
       rol: {
-        id: '677d15fd24c5646a1f7f69c0',
+        _id: new ObjectId('677d15fd24c5646a1f7f69c0'),
         nombre: 'Usuario-Administrador',
       },
       esResponsable: true,
@@ -27,7 +27,7 @@ export const db: DB = {
       esContraseñaTemporal: false,
       contraseña: 'carlos123',
       unidad: {
-        id: '677d1539c3cb57a1f7b57e77',
+        _id: new ObjectId('677d1539c3cb57a1f7b57e77'),
         nombre: 'Unidad E',
         code: 'E1',
       },
@@ -40,7 +40,7 @@ export const db: DB = {
       telefono: '910234567',
       movil: '620234567',
       rol: {
-        id: '677d1609d7dfb3725db36e45',
+        _id: new ObjectId('677d1609d7dfb3725db36e45'),
         nombre: 'Usuario-Escritura',
       },
       esResponsable: true,
@@ -49,7 +49,7 @@ export const db: DB = {
       esContraseñaTemporal: false,
       contraseña: 'maria456',
       unidad: {
-        id: '677d15df0b8b68a6601e826a',
+        _id: new ObjectId('677d15df0b8b68a6601e826a'),
         nombre: 'Unidad B',
         code: 'B2',
       },
@@ -62,7 +62,7 @@ export const db: DB = {
       telefono: '910345678',
       movil: '620345678',
       rol: {
-        id: '677d160e6d98cb2a17428884',
+        _id: new ObjectId('677d160e6d98cb2a17428884'),
         nombre: 'Usuario-Lectura',
       },
       esResponsable: false,
@@ -71,7 +71,7 @@ export const db: DB = {
       esContraseñaTemporal: true,
       contraseña: 'temp480',
       unidad: {
-        id: '677d15f51ea7df458590b5f9',
+        _id: new ObjectId('677d15f51ea7df458590b5f9'),
         nombre: 'Unidad C',
         code: 'C4',
       },
@@ -84,7 +84,7 @@ export const db: DB = {
       telefono: '910456789',
       movil: '620456789',
       rol: {
-        id: '677d160e6d98cb2a17428884',
+        _id: new ObjectId('677d160e6d98cb2a17428884'),
         nombre: 'Usuario-Lectura',
       },
       esResponsable: false,
@@ -93,7 +93,7 @@ export const db: DB = {
       esContraseñaTemporal: true,
       contraseña: 'temp480',
       unidad: {
-        id: '677d15f51ea7df458590b5f9',
+        _id: new ObjectId('677d15f51ea7df458590b5f9'),
         nombre: 'Unidad C',
         code: 'C4',
       },
@@ -106,7 +106,7 @@ export const db: DB = {
       telefono: '910567890',
       movil: '620567890',
       rol: {
-        id: '677d160e6d98cb2a17428884',
+        _id: new ObjectId('677d160e6d98cb2a17428884'),
         nombre: 'Usuario-Lectura',
       },
       esResponsable: false,
@@ -115,28 +115,28 @@ export const db: DB = {
       esContraseñaTemporal: true,
       contraseña: 'temp480',
       unidad: {
-        id: '677d15f51ea7df458590b5f9',
+        _id: new ObjectId('677d15f51ea7df458590b5f9'),
         nombre: 'Unidad C',
         code: 'C4',
       },
     },
   ],
   unidadProponentes: [
-    { id: '677d1539c3cb57a1f7b57e77', nombre: 'Unidad E', code: 'E1' },
-    { id: '677d15df0b8b68a6601e826a', nombre: 'Unidad B', code: 'B2' },
-    { id: '677d15f51ea7df458590b5f9', nombre: 'Unidad C', code: 'C4' },
+    { _id: new ObjectId('677d1539c3cb57a1f7b57e77'), nombre: 'Unidad E', code: 'E1' },
+    { _id: new ObjectId('677d15df0b8b68a6601e826a'), nombre: 'Unidad B', code: 'B2' },
+    { _id: new ObjectId('677d15f51ea7df458590b5f9'), nombre: 'Unidad C', code: 'C4' },
   ],
   roles: [
     {
-      id: '677d15fd24c5646a1f7f69c0',
+      _id: new ObjectId('677d15fd24c5646a1f7f69c0'),
       nombre: 'Usuario-Administrador',
     },
     {
-      id: '677d1609d7dfb3725db36e45',
+      _id: new ObjectId('677d1609d7dfb3725db36e45'),
       nombre: 'Usuario-Escritura',
     },
     {
-      id: '677d160e6d98cb2a17428884',
+      _id: new ObjectId('677d160e6d98cb2a17428884'),
       nombre: 'Usuario-Lectura',
     },
   ],

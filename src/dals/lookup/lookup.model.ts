@@ -1,6 +1,6 @@
-import { Lookup } from '#common/models/index.js';
+import { LookupModel } from '#common/models/index.js';
 
 export interface UnidadRolList {
-  roles: Lookup[];
-  unidades: Lookup[];
+  roles: LookupModel[];
+  unidades: LookupModel[];
 }
