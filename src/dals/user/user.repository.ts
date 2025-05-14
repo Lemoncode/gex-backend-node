@@ -1,21 +1,36 @@
 import { verifyHash } from '#common/helpers/index.js';
 import { mapStringToObjectId } from '#common/mappers/index.js';
-import { SelectedFields } from '#common/models/index.js';
+import { CollectionQuery, SelectedFields } from '#common/models/index.js';
 import { getUserContext } from './user.context.js';
 import { Usuario } from './user.model.js';
 
 export const userRepository = {
-  getUserList: async (page?: number, pageSize?: number): Promise<Usuario[]> => {
+  getUserList: async (page?: number, pageSize?: number): Promise<CollectionQuery<Usuario>> => {
     const existPageAndPageSize = page !== undefined && page !== null && pageSize !== undefined && pageSize !== null;
+    const totalDocuments = await getUserContext().countDocuments();
 
     if (existPageAndPageSize) {
       const skip = page !== undefined && page !== null ? page * pageSize : 0;
       const limit = pageSize ?? 0;
 
-      return await getUserContext().find().skip(skip).limit(limit).toArray();
+      const userListPaginated = await getUserContext().find().skip(skip).limit(limit).toArray();
+
+      return {
+        data: userListPaginated,
+        pagination: {
+          totalPages: totalDocuments,
+        },
+      };
     }
 
-    return await getUserContext().find().toArray();
+    const userList = await getUserContext().find().toArray();
+
+    return {
+      data: userList,
+      pagination: {
+        totalPages: totalDocuments,
+      },
+    };
   },
   getUser: async (id: string, selectedFields?: SelectedFields<Usuario>) =>
     await getUserContext().findOne({ _id: mapStringToObjectId(id) }, { projection: selectedFields }),

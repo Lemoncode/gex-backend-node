@@ -1,5 +1,6 @@
 import { formatEmail } from '#common/helpers/index.js';
 import { mapObjectIdToString, mapStringToObjectId, mapToCollection } from '#common/mappers/index.js';
+import { CollectionQuery } from '#common/models/collection-query.model.js';
 import * as model from '#dals/user/user.model.js';
 import * as apiModel from './user.api-model.js';
 
@@ -17,8 +18,14 @@ export const mapUserFromModelToApi = (user: model.Usuario): apiModel.Usuario => 
   unidad: user.unidad,
 });
 
-export const mapUserListFromModelToApi = (userList: model.Usuario[]): apiModel.Usuario[] =>
-  mapToCollection(userList, mapUserFromModelToApi);
+export const mapUserListFromModelToApi = (
+  userList: CollectionQuery<model.Usuario>
+): CollectionQuery<apiModel.Usuario> => ({
+  data: mapToCollection(userList.data, mapUserFromModelToApi),
+  pagination: {
+    totalPages: userList.pagination.totalPages,
+  },
+});
 
 export const mapUserFromApiToModel = (userParams: apiModel.SaveUserParams): model.Usuario => {
   const { user, hashedPassword, isTemporalPassword } = userParams;

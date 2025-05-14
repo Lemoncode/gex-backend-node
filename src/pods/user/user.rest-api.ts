@@ -9,6 +9,15 @@ import * as model from '#dals/user/user.model.js';
 export const userApi = Router();
 
 userApi
+  .get('/:email/exists', async (req, res, next) => {
+    try {
+      const { email } = req.params;
+      const isAnExistingEmail = await userRepository.emailExists(email, req.userSession?.id);
+      res.send({ isAnExistingEmail });
+    } catch (error) {
+      next(error);
+    }
+  })
   .get('/', async (req, res, next) => {
     try {
       const page = Number(req.query.page);
