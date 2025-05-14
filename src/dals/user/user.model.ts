@@ -1,4 +1,4 @@
-import { Lookup } from '#common/models/lookup.js';
+import { LookupModel } from '#common/models/lookup.model.js';
 import { ObjectId } from 'mongodb';
 
 export interface Usuario {
@@ -8,11 +8,11 @@ export interface Usuario {
   email: string;
   telefono: string;
   movil: string;
-  rol: Lookup;
+  rol: LookupModel;
   esResponsable: boolean;
   esProponente: boolean;
   esAutorizante: boolean;
   esContraseñaTemporal: boolean;
   contraseña: string;
-  unidad: Lookup;
+  unidad: LookupModel;
 }

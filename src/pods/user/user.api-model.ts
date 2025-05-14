@@ -1,23 +1,29 @@
-import { Lookup } from '#common/models/lookup.js';
-
-export interface Usuario {
+export interface UsuarioDetalle {
   id: string;
   nombre: string;
   apellido: string;
   email: string;
   telefono: string;
   movil: string;
-  rol: Lookup;
+  rol: string;
   esResponsable: boolean;
   esProponente: boolean;
   esAutorizante: boolean;
   esContraseñaTemporal?: boolean;
   contraseña?: string;
-  unidad: Lookup;
+  unidad: string;
+}
+
+export interface UsuarioLista {
+  id: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  unidad: string;
 }
 
 export interface SaveUserParams {
-  user: Usuario;
+  user: UsuarioDetalle;
   hashedPassword: string;
   isTemporalPassword: boolean;
 }

@@ -7,5 +7,5 @@
     "isolatedModules": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "config/test/config.d.ts"]
+  "include": ["src/**/*", "config/test/config.d.ts", "./global-types.d.ts"]
 }

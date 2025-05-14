@@ -1,12 +1,11 @@
 # gex-backend-node
 
->> Note: We must be installed almost Node.js 22.11.0 or higher.
->> 
->> [Install Node.js](https://nodejs.org/)
->>
->> we can also use [nvm for windows](https://github.com/coreybutler/nvm-windows/releases) to manage the Node.js versions
->> or for linux/macOS we can use [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
-
+> > Note: We must be installed almost Node.js 22.11.0 or higher.
+> >
+> > [Install Node.js](https://nodejs.org/)
+> >
+> > we can also use [nvm for windows](https://github.com/coreybutler/nvm-windows/releases) to manage the Node.js versions
+> > or for linux/macOS we can use [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 
 ## Steps to run the project
 
@@ -37,7 +36,7 @@ npm run start:console-runners
 
 Now, you can select the option to install seed data.
 
-```bash 
+```bash
 ❯   seed-data
     exit
 ```
@@ -46,11 +45,43 @@ After select the option `seed-data` and you will insert the seed data in the dat
 
 ### Endpoints now available
 
-#### Get users: 
+#### Login:
+
+- [POST] http://localhost:3000/api/login
+
+Rol usuario-administrador:
+
+```json
+{
+  "email": "carlos.gonzalez@example.com",
+  "password": "carlos123"
+}
+```
+
+Rol Usuario-Escritura:
+
+```json
+{
+  "email": "maria.martinez@example.com",
+  "password": "maria456"
+}
+```
+
+Rol Usuario-Lectura:
+
+```json
+{
+  "email": "juan.rodriguez@example.com",
+  "password": "temp480"
+}
+
+#### Get users:
 
 - [GET] http://localhost:3000/api/users
 - [GET] http://localhost:3000/api/users?page=1&pageSize=10
 
+```
 
+```
 
-
+```

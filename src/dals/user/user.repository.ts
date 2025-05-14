@@ -1,22 +1,38 @@
-import { mapStringToObjectId } from '#common/mappers/object-id.mappers.js';
-import { SelectedFields } from '#common/models/index.js';
+import { verifyHash } from '#common/helpers/index.js';
+import { mapStringToObjectId } from '#common/mappers/index.js';
+import { CollectionQuery, SelectedFields } from '#common/models/index.js';
 import { getUserContext } from './user.context.js';
 import { Usuario } from './user.model.js';
 
 export const userRepository = {
-  getUserList: async (page?: number, pageSize?: number): Promise<Usuario[]> => {
-    const existPageAndPageSize = page !== undefined && page !== null && pageSize !== undefined && pageSize !== null;
+  getUserList: async (page?: number, pageSize?: number): Promise<CollectionQuery<Usuario>> => {
+    const existPageAndPageSize = Number.isInteger(page) && Number.isInteger(pageSize);
+    const totalDocuments = await getUserContext().countDocuments();
 
     if (existPageAndPageSize) {
       const skip = page !== undefined && page !== null ? page * pageSize : 0;
       const limit = pageSize ?? 0;
 
-      return await getUserContext().find().skip(skip).limit(limit).toArray();
-    }
+      const userListPaginated = await getUserContext().find().skip(skip).limit(limit).toArray();
 
-    return await getUserContext().find().toArray();
+      return {
+        data: userListPaginated,
+        pagination: {
+          totalPages: totalDocuments,
+        },
+      };
+    } else {
+      const userList = await getUserContext().find().toArray();
+
+      return {
+        data: userList,
+        pagination: {
+          totalPages: totalDocuments,
+        },
+      };
+    }
   },
-  getUser: async (id: string, selectedFields: SelectedFields<Usuario>) =>
+  getUser: async (id: string, selectedFields?: SelectedFields<Usuario>) =>
     await getUserContext().findOne({ _id: mapStringToObjectId(id) }, { projection: selectedFields }),
   emailExists: async (email: string, id: string) =>
     (await getUserContext().countDocuments({ email, _id: { $ne: mapStringToObjectId(id) } })) > 0,
@@ -28,5 +44,14 @@ export const userRepository = {
     );
 
     return saveUser;
+  },
+  isValidLogin: async (email: string, password: string) => {
+    const user = await getUserContext().findOne({ email });
+    if (user) {
+      const { contraseña, ...userInfo } = user;
+      const isEqualPassword = verifyHash(password, contraseña);
+      return isEqualPassword ? { ...userInfo, contraseña: null } : null;
+    }
+    return null;
   },
 };
