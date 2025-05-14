@@ -1,4 +1,5 @@
-import { mapStringToObjectId } from '#common/mappers/object-id.mappers.js';
+import { verifyHash } from '#common/helpers/index.js';
+import { mapStringToObjectId } from '#common/mappers/index.js';
 import { SelectedFields } from '#common/models/index.js';
 import { getUserContext } from './user.context.js';
 import { Usuario } from './user.model.js';
@@ -28,5 +29,14 @@ export const userRepository = {
     );
 
     return saveUser;
+  },
+  isValidLogin: async (email: string, password: string) => {
+    const user = await getUserContext().findOne({ email, password });
+    if (user) {
+      const { contraseña, ...userInfo } = user;
+      const isEqualPassword = verifyHash(password, contraseña);
+      return isEqualPassword ? { ...userInfo, contraseña: null } : null;
+    }
+    return null;
   },
 };

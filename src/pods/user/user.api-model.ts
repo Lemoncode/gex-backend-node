@@ -1,4 +1,4 @@
-import { Lookup } from '#common/models/lookup.js';
+import { Lookup } from '#common/models/index.js';
 
 export interface Usuario {
   id: string;

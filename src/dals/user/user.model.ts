@@ -1,4 +1,4 @@
-import { Lookup } from '#common/models/lookup.js';
+import { Lookup } from '#common/models/lookup.model.js';
 import { ObjectId } from 'mongodb';
 
 export interface Usuario {
