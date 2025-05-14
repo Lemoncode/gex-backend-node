@@ -17,7 +17,7 @@ export const userRepository = {
 
     return await getUserContext().find().toArray();
   },
-  getUser: async (id: string, selectedFields: SelectedFields<Usuario>) =>
+  getUser: async (id: string, selectedFields?: SelectedFields<Usuario>) =>
     await getUserContext().findOne({ _id: mapStringToObjectId(id) }, { projection: selectedFields }),
   emailExists: async (email: string, id: string) =>
     (await getUserContext().countDocuments({ email, _id: { $ne: mapStringToObjectId(id) } })) > 0,

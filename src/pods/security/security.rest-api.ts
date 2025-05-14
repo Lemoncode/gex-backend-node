@@ -29,19 +29,19 @@ securityApi
       next(error);
     }
   })
-  // .get('/whoami', authenticationMiddleware, async (req, res, next) => {
-  //   try {
-  //     const user = await userRepository.getUserById(req.userSession?.id);
+  .get('/whoami', authenticationMiddleware, async (req, res, next) => {
+    try {
+      const user = await userRepository.getUser(req.userSession?.id);
 
-  //     if (user) {
-  //       res.status(200).send({ id: user._id.toHexString(), nombre: user.nombre, rol: user.rol });
-  //     } else {
-  //       res.sendStatus(401);
-  //     }
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // })
+      if (user) {
+        res.status(200).send({ id: user._id.toHexString(), nombre: user.nombre, rol: user.rol });
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      next(error);
+    }
+  })
   .post('/logout', authenticationMiddleware, async (req, res, next) => {
     try {
       res.clearCookie(authConstants.sessionKey);
