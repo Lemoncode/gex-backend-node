@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import { UserSession } from '#common/models/index.js';
-import { ENV } from '#core/constants/index.js';
+import { authConstants, ENV } from '#core/constants/index.js';
 
 const verify = (token: string, secret: string): Promise<UserSession> =>
   new Promise((resolve, reject) => {
@@ -26,7 +26,7 @@ export const authenticationMiddleware: RequestHandler = async (req, res, next) =
     next();
   } catch (error) {
     console.error(error);
-    res.clearCookie('authorization');
+    res.clearCookie(authConstants.sessionKey);
     res.sendStatus(401);
   }
 };
