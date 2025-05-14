@@ -1,1 +1,1 @@
-export * from './lookup.api.js';
+export * from './lookup.rest-api.js';
