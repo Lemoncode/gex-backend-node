@@ -54,3 +54,17 @@ export const mapUserFromApiToModel = (userParams: apiModel.SaveUserParams): mode
     unidad: { _id: mapStringToObjectId(user.unidad), nombre: user.unidad },
   };
 };
+
+export const mapUserUpdateFromApiToModel = (user: apiModel.UsuarioDetalle): Partial<model.Usuario> => {
+  return {
+    _id: mapStringToObjectId(user.id),
+    nombre: user.nombre,
+    apellido: user.apellido,
+    email: formatEmail(user.email),
+    telefono: user.telefono,
+    movil: user.movil,
+    esResponsable: user.esResponsable,
+    esProponente: user.esProponente,
+    esAutorizante: user.esAutorizante,
+  };
+};
