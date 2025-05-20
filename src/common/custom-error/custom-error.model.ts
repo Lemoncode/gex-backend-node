@@ -4,6 +4,7 @@ export enum CustomInternalCodes {
   UserNotFound = 'user-002',
   RolNotFound = 'user-003',
   UnidadNotFound = 'user-004',
+  InvalidPassword = 'user-005',
 }
 
 export interface Error {
