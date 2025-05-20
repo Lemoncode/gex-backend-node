@@ -10,7 +10,7 @@ import {
   mapUserFromApiToModel,
   mapUserUpdateFromApiToModel,
 } from './user.mappers.js';
-import { validationPostUser, validationUpdateUser } from './validations/index.js';
+import { validationPostUser, validationUpdateUser, validationChangePassword } from './validations/index.js';
 import * as apiModel from './user.api-model.js';
 import * as model from '#dals/user/user.model.js';
 
@@ -110,6 +110,40 @@ userApi
           validationResult.error?.error == CustomInternalCodes.UnidadNotFound
             ? 422
             : 409;
+
+        res.status(statusCode).send(validationResult.error);
+      }
+    } catch (error) {
+      next(error);
+    }
+  })
+  .post('/change-password', async (req, res, next) => {
+    try {
+      const passwordData: apiModel.ChangePasswordParams = req.body;
+      const validationResult = await validationChangePassword(passwordData);
+
+      if (validationResult.succeded) {
+        const hashedPassword = await hash(passwordData.nuevaContraseña);
+        const user = await userRepository.getUser(passwordData.id);
+
+        await userRepository.saveUser({
+          ...user,
+          contraseña: hashedPassword,
+          esContraseñaTemporal: false,
+        });
+
+        res.sendStatus(204);
+      } else {
+        const statusCode = (() => {
+          switch (validationResult.error?.error) {
+            case CustomInternalCodes.UserNotFound:
+              return 422;
+            case CustomInternalCodes.InvalidPassword:
+              return 401;
+            default:
+              return 400;
+          }
+        })();
 
         res.status(statusCode).send(validationResult.error);
       }

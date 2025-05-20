@@ -27,3 +27,9 @@ export interface SaveUserParams {
   hashedPassword: string;
   isTemporalPassword: boolean;
 }
+
+export interface ChangePasswordParams {
+  id: string;
+  contraseñaActual: string;
+  nuevaContraseña: string;
+}
